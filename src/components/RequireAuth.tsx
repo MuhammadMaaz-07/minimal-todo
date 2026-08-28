@@ -1,0 +1,22 @@
+import { Loader2 } from "lucide-react";
+import type { ReactNode } from "react";
+import { Navigate } from "react-router";
+
+export function RequireAuth({ children }: { children: ReactNode }) {
+  const isLoading = false;
+  const isAuthenticated = true;
+
+  if (isLoading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-background">
+        <Loader2 className="size-6 animate-spin text-muted-foreground" />
+      </main>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/auth" replace />;
+  }
+
+  return children;
+}
